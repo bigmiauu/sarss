@@ -12,7 +12,14 @@
     }
 //Incluimos el archivo de conexion a la BD   
     include "conexion.php";
-        
+//Consultas para ver los eventos activos   
+	$consulta1= 'SELECT * FROM evento;';
+    $resultado1= mysqli_query($conexion,$consulta1);
+    $numf= mysqli_num_rows($resultado1);
+    
+    $consulta2= 'SELECT * FROM evento WHERE estatus = "corriendo";';
+    $resultado2= mysqli_query($conexion,$consulta2);
+	    
 ?>
 <head>
     <title>SARSS</title>
@@ -36,7 +43,7 @@
     <link type="text/css" rel="stylesheet" href="styles/zabuto_calendar.min.css">
     <link type="text/css" rel="stylesheet" href="styles/pace.css">
     <link type="text/css" rel="stylesheet" href="styles/jquery.news-ticker.css">
-	<link type="text/css" rel="stylesheet" href="styles/form.css">
+	<link type="text/css" rel="stylesheet" href="styles/tabla.css">
 </head>
 <body>
     <div>
@@ -149,7 +156,7 @@
                 <ul id="side-menu" class="nav">
                     
                      <div class="clearfix"></div>
-                    <li class="active"><a href="#"><i class="fa fa-desktop fa-fw">
+                    <li><a href=index.php><i class="fa fa-desktop fa-fw">
 					</i><span class="menu-title">Inicio</span></a></li>
                     
                     <!--
@@ -159,7 +166,7 @@
                     </i><span class="menu-title">UI Elements</span></a>
                     -->
                     </li>
-                    <li><a href="eventos.php"><i class="fa fa-edit fa-fw">
+                    <li class="active"><a href="eventos.php"><i class="fa fa-edit fa-fw">
                         <div class="icon-bg bg-violet"></div>
                     </i><span class="menu-title">Eventos</span></a>
                       
@@ -302,13 +309,47 @@
                             <div class="col-lg-8">
                                 <div class="panel">
                                     <div class="panel-body">
-                                        <div class="row">
+                                        
+                                         <a href="#"><img src="images/eventos.png"/></a>&nbsp;<a href="nuevoevento.php"><img src="images/nuevoevento.png"/></a>&nbsp;<a href="modificarevento.php"><img src="images/modificarevento.png"/></a><br>                              
 
-                                          <p>&nbsp;</p>
-                                          <p>&nbsp;</p>
-                                          <p>&nbsp;</p>
-                                          <p>&nbsp;</p>
-                                          <p>&nbsp;</p>
+<br><br><TABLE class="CSSTableGenerator" WIDTH=85%>
+<?php
+
+    echo '<td>';
+    echo 'ID';
+    echo '</td>';
+    echo '<td>';
+    echo 'Tipo';
+    echo '</td>';
+    echo '<td>';
+    echo 'Fecha';
+    echo '</td>';
+    while($registro= mysqli_fetch_array($resultado2)){
+	
+    echo '<tr>';
+    echo '<td>';
+    echo $registro['id'];     
+    echo '</td>';
+    echo '<td>';
+    if($registro['tipo']=='ingenieria'){
+	echo 'Ingenieria';
+    }else{
+	echo 'Beca Pronabe';
+    }
+    echo "</td>";
+    echo '<td>';
+    echo $registro['fecha'];
+    echo "</td>";
+    echo '</tr>';
+    }
+
+
+
+?>
+	    </TABLE>
+
+										  
+										  
                                           <p>&nbsp;</p>
                                           <p>&nbsp;</p>
                                           <p>&nbsp;</p>

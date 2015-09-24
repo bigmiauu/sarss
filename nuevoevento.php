@@ -12,7 +12,14 @@
     }
 //Incluimos el archivo de conexion a la BD   
     include "conexion.php";
-        
+//Consultas para ver los eventos activos   
+	$consulta1= 'SELECT * FROM evento;';
+    $resultado1= mysqli_query($conexion,$consulta1);
+    $numf= mysqli_num_rows($resultado1);
+    
+    $consulta2= 'SELECT * FROM evento WHERE estatus = "corriendo";';
+    $resultado2= mysqli_query($conexion,$consulta2);
+	    
 ?>
 <head>
     <title>SARSS</title>
@@ -36,6 +43,7 @@
     <link type="text/css" rel="stylesheet" href="styles/zabuto_calendar.min.css">
     <link type="text/css" rel="stylesheet" href="styles/pace.css">
     <link type="text/css" rel="stylesheet" href="styles/jquery.news-ticker.css">
+	<link type="text/css" rel="stylesheet" href="styles/tabla.css">
 	<link type="text/css" rel="stylesheet" href="styles/form.css">
 </head>
 <body>
@@ -149,7 +157,7 @@
                 <ul id="side-menu" class="nav">
                     
                      <div class="clearfix"></div>
-                    <li class="active"><a href="#"><i class="fa fa-desktop fa-fw">
+                    <li><a href=index.php><i class="fa fa-desktop fa-fw">
 					</i><span class="menu-title">Inicio</span></a></li>
                     
                     <!--
@@ -159,7 +167,7 @@
                     </i><span class="menu-title">UI Elements</span></a>
                     -->
                     </li>
-                    <li><a href="eventos.php"><i class="fa fa-edit fa-fw">
+                    <li class="active"><a href="eventos.php"><i class="fa fa-edit fa-fw">
                         <div class="icon-bg bg-violet"></div>
                     </i><span class="menu-title">Eventos</span></a>
                       
@@ -284,7 +292,7 @@
                     </div>
                     <ol class="breadcrumb page-breadcrumb pull-right">
                         <li><i class="fa fa-home"></i>&nbsp;<a href="index.html">SARSS</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                        <li class="hidden"><a href="#">Inicio</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+                        <li class="hidden"><a href="index.php">Inicio</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
                         <li class="active">Inicio</li>
                     </ol>
                     <div class="clearfix">
@@ -302,13 +310,21 @@
                             <div class="col-lg-8">
                                 <div class="panel">
                                     <div class="panel-body">
-                                        <div class="row">
+                                        
+                                         <a href="eventos.php"><img src="images/eventos.png"/></a>&nbsp;<a href="#"><img src="images/nuevoevento.png"/></a>&nbsp;<a href="modificarevento.php"><img src="images/modificarevento.png"/></a><br>                              
 
-                                          <p>&nbsp;</p>
-                                          <p>&nbsp;</p>
-                                          <p>&nbsp;</p>
-                                          <p>&nbsp;</p>
-                                          <p>&nbsp;</p>
+<br><form class="form-container">
+<div class="form-title"><h2>Nuevo Evento</h2></div>
+<div class="form-title">Name</div>
+<input class="form-field" type="text" name="firstname" /><br />
+<div class="form-title">Email</div>
+<input class="form-field" type="text" name="email" /><br />
+<div class="submit-container">
+<input class="submit-button" type="submit" value="Crear" />
+</div>
+</form>
+										  
+										  
                                           <p>&nbsp;</p>
                                           <p>&nbsp;</p>
                                           <p>&nbsp;</p>
